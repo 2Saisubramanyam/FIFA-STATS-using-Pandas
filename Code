@@ -1,0 +1,40 @@
+#IMPORTS
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#Reading Data set and printing Top 5 Players
+fifa = pd.read_csv('fifa_data.csv')
+fifa.head(5)
+
+# printing last 5 players
+fifa.tail(5)
+
+#Over all ratings of Players
+plt.hist(fifa.Overall,color='r')
+plt.title('Overall skill ratings of players')
+plt.ylabel('Number of players')
+plt.xlabel('skills')
+plt.show()
+
+#Players of Juventus
+juventus = fifa.loc[fifa['Club']=='Juventus']
+print(juventus)
+
+#Comparision between Dybala and mbappe
+dybala = fifa.loc[fifa['Name']=='P. Dybala']['Overall']
+mbappe = fifa.loc[fifa['Name']=='K. Mbappé']['Overall']
+plt.title('Dybala vs Mbappe')
+labels = ['dyabla','mbappe']
+plt.boxplot([dybala,mbappe], labels = labels)
+plt.legend(labels)
+plt.show()
+
+#Comparision between Juventus PSG and FCB on Overall Ratings
+plt.figure(figsize=(5,8))
+juventus = fifa.loc[fifa.Club =='Juventus']['Overall']
+PSG = fifa.loc[fifa.Club =='Paris Saint-Germain']['Overall']
+FCB = fifa.loc[fifa.Club =='FC Barcelona']['Overall']
+labels = ['Juventus','PSG','FCB']
+plt.boxplot([juventus,PSG,FCB],labels = labels)
+plt.show()
